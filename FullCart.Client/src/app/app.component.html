@@ -12,7 +12,7 @@
           <a class="nav-link" href="#">Category</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Brand</a>
+          <a class="nav-link" [routerLink]="['/brands']">Brand</a>
         </li>
       </ul>
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngIf="loggedInUserRole == 'Customer'">

@@ -11,6 +11,8 @@ import { AdminProductComponent } from './admin-product/admin-product.component';
 import { CustomerProductComponent } from './customer-product/customer-product.component';
 import { UnAuthorizedComponent } from './un-authorized/un-authorized.component';
 import { DashBoardComponent } from './dash-board/dash-board.component';
+import { BrandComponent } from './admin-product/brand/brand.component';
+import { NewBrandComponent } from './admin-product/brand/new-brand/new-brand.component';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -23,7 +25,9 @@ export function tokenGetter() {
     AdminProductComponent,
     CustomerProductComponent,
     UnAuthorizedComponent,
-    DashBoardComponent
+    DashBoardComponent,
+    BrandComponent,
+    NewBrandComponent
   ],
   imports: [
     BrowserModule,

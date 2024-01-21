@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FullCart.DAL\FullCart.DAL.csproj" />
+    <ProjectReference Include="..\FullCart.DTO\FullCart.DTO.csproj" />
+  </ItemGroup>
+
 </Project>

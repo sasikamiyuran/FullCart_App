@@ -1,6 +1,9 @@
 using FullCart.BLL.Interfaces;
 using FullCart.BLL.Services;
 using FullCart.DAL.Context;
+using FullCart.DAL.Interface;
+using FullCart.DAL.Repository;
+using FullCart.Utility.Utility;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -60,7 +63,12 @@ builder.Services.AddAuthentication(options =>
 //    });
 //});
 
+builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
+
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IBrandService, BrandService>();
+
+builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 
 var app = builder.Build();
 

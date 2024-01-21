@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FullCart.DAL\FullCart.DAL.csproj" />
     <ProjectReference Include="..\FullCart.DTO\FullCart.DTO.csproj" />
+    <ProjectReference Include="..\FullCart.Utility\FullCart.Utility.csproj" />
   </ItemGroup>
 
 </Project>

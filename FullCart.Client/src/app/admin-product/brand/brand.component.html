@@ -1,0 +1,23 @@
+<div class="col-8"><h4>Example Page Header</h4></div>
+<div class="col-4">
+  <button class="btn btn-outline-info" (click)="addNewBrand()">Add New</button>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let brand of brands">
+      <th scope="row">{{ brand.brandId }}</th>
+      <td>{{ brand.name }}</td>
+      <td>
+        <button class="btn btn-outline-info" (click)="updateBrand(brand.brandId)" >Edit</button>
+        <button class="btn btn-outline-danger">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
