@@ -43,7 +43,8 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', data.token);
 
           let roles = this._authService.getUserRoles();
-          console.log(roles);
+          
+          this._service.setLoggedInUserRole(roles);
           
           if (roles == UserRoleEnum.ADMIN) {
             this._router.navigate(['/admin-product'])

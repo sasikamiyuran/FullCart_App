@@ -10,6 +10,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AdminProductComponent } from './admin-product/admin-product.component';
 import { CustomerProductComponent } from './customer-product/customer-product.component';
 import { UnAuthorizedComponent } from './un-authorized/un-authorized.component';
+import { DashBoardComponent } from './dash-board/dash-board.component';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -21,7 +22,8 @@ export function tokenGetter() {
     LoginComponent,
     AdminProductComponent,
     CustomerProductComponent,
-    UnAuthorizedComponent
+    UnAuthorizedComponent,
+    DashBoardComponent
   ],
   imports: [
     BrowserModule,
