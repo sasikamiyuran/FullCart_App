@@ -1,4 +1,7 @@
+using FullCart.BLL.Interfaces;
+using FullCart.BLL.Services;
 using FullCart.DAL.Context;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -29,7 +32,12 @@ options =>
 .AddRoles<IdentityRole>();
 
 // Add Authentication Authorization
-builder.Services.AddAuthentication("Bearer").AddJwtBearer(options =>
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new()
     {
@@ -42,14 +50,16 @@ builder.Services.AddAuthentication("Bearer").AddJwtBearer(options =>
     };
 });
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("MustBeCustomer", policy =>
-    {
-        policy.RequireAuthenticatedUser();
-        policy.RequireClaim("Role", "Customer");
-    });
-});
+//builder.Services.AddAuthorization(options =>
+//{
+//    options.AddPolicy("MustBeCustomer", policy =>
+//    {
+//        policy.RequireAuthenticatedUser();
+//        policy.RequireClaim("Role", "Customer");
+//    });
+//});
+
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
@@ -59,6 +69,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
