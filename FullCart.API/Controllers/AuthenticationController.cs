@@ -16,16 +16,16 @@ namespace FullCart.API.Controllers
         }
 
         [HttpPost("Authenticate")]
-        public async Task<IActionResult> Authenticate(AuthenticationRequestBody authenticationRequest)
+        public async Task<AuthenticationResponse> Authenticate(AuthenticationRequestBody authenticationRequest)
         {
             var token = await _authService.GenerateToken(authenticationRequest.UserName, authenticationRequest.Password);
 
             if (token == null)
             {
-                return Unauthorized();
+                return new AuthenticationResponse { StatusCode = 401, Success = false };
             }
 
-            return Ok(token);
+            return new AuthenticationResponse { Success = true, StatusCode = 200, Token = token };
         }
     }
 }
