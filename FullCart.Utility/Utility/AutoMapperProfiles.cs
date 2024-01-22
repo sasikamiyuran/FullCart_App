@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FullCart.DAL.Entities;
+using FullCart.Domain.Entities;
 using FullCart.DTO.DTO;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,8 @@ namespace FullCart.Utility.Utility
             public AutoMapperProfile()
         {
             CreateMap<Brand, BrandDto>().ReverseMap();
-            CreateMap<BrandDto, Brand>().ReverseMap();
+            CreateMap<Category, CategoryDto>().ReverseMap();
+            CreateMap<Product, ProductDto>().ReverseMap();
         }
     }
 }

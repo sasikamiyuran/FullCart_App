@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-8"><h4>Add Product</h4></div>
+  </div>
+  <div class="form-group">
+    <label for="brandDrp">Brand</label>
+    <select [(ngModel)]="product.brandId" class="form-control" id="brandDrp">
+      <option *ngFor="let brand of brands" [ngValue]="brand.brandId">{{brand.name}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="CategoryDrp">Category</label>
+    <select [(ngModel)]="product.categoryId" class="form-control" id="CategoryDrp">
+        <option *ngFor="let category of categories" [ngValue]="category.categoryId">{{category.name}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="brandNameTxt">Product Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="brandNameTxt"
+      [(ngModel)]="product.name"
+    />
+  </div>
+  <div class="form-group">
+    <label for="desTxt">Description</label>
+    <input
+      type="text"
+      class="form-control"
+      id="desTxt"
+      [(ngModel)]="product.description"
+    />
+  </div>
+  <div class="form-group">
+    <label for="priceTxt">Price</label>
+    <input
+      type="number"
+      class="form-control"
+      id="priceTxt"
+      [(ngModel)]="product.price"
+    />
+  </div>
+  <div class="form-group">
+    <label for="quantityTxt">Quantity</label>
+    <input
+      type="number"
+      class="form-control"
+      id="quantityTxt"
+      [(ngModel)]="product.quantity"
+    />
+  </div>
+  <button class="btn btn-secondary" (click)="backToList()">Cancel</button>
+  <button type="submit" class="btn btn-primary" (click)="addNewProduct()">
+    Save
+  </button>
+  

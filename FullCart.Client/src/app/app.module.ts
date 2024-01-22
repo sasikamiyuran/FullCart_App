@@ -13,6 +13,10 @@ import { UnAuthorizedComponent } from './un-authorized/un-authorized.component';
 import { DashBoardComponent } from './dash-board/dash-board.component';
 import { BrandComponent } from './admin-product/brand/brand.component';
 import { NewBrandComponent } from './admin-product/brand/new-brand/new-brand.component';
+import { CategoryComponent } from './admin-product/category/category.component';
+import { ProductComponent } from './admin-product/product/product.component';
+import { NewCategoryComponent } from './admin-product/category/new-category/new-category.component';
+import { NewProductComponent } from './admin-product/product/new-product/new-product.component';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -27,7 +31,11 @@ export function tokenGetter() {
     UnAuthorizedComponent,
     DashBoardComponent,
     BrandComponent,
-    NewBrandComponent
+    NewBrandComponent,
+    CategoryComponent,
+    ProductComponent,
+    NewCategoryComponent,
+    NewProductComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,8 @@ import { AuthenticationRequestModel } from './Models/authentication-request.mode
 import { UserRoleEnum } from './Enum/user-role.enum';
 import { AuthService } from './util_services/auth.service';
 import { BrandModel } from './Models/brand.model';
+import { ProductModel } from './Models/product.model';
+import { CategoryModel } from './Models/category.model';
 
 const baseUrl = 'http://localhost:5222/';
 
@@ -37,6 +39,7 @@ export class ClientAppService {
     return this._http.post(`${baseUrl}api/Authentication/Authenticate`, body);
   }
 
+  //Brand Services
   getBrands(): Observable<any> {
     const header = this.getHeaders();
     return this._http.get(`${baseUrl}api/Brands`, { headers: header });
@@ -50,5 +53,37 @@ export class ClientAppService {
   addBrand(brand: BrandModel): Observable<any> {
     const header = this.getHeaders();
     return this._http.post(`${baseUrl}api/Brands`, brand, { headers: header });
+  }
+
+  //Category Services
+  getCategories(): Observable<any> {
+    const header = this.getHeaders();
+    return this._http.get(`${baseUrl}api/Categories`, { headers: header });
+  }
+
+  getCategoryById(Id: number): Observable<any> {
+    const header = this.getHeaders();
+    return this._http.get(`${baseUrl}api/Categories/` + Id, { headers: header });
+  }
+
+  addCategory(brand: CategoryModel): Observable<any> {
+    const header = this.getHeaders();
+    return this._http.post(`${baseUrl}api/Categories`, brand, { headers: header });
+  }
+
+  //Product Services
+  getProducts(): Observable<any> {
+    const header = this.getHeaders();
+    return this._http.get(`${baseUrl}api/Products`, { headers: header });
+  }
+
+  getProductById(Id: number): Observable<any> {
+    const header = this.getHeaders();
+    return this._http.get(`${baseUrl}api/Products/` + Id, { headers: header });
+  }
+
+  addProduct(brand: ProductModel): Observable<any> {
+    const header = this.getHeaders();
+    return this._http.post(`${baseUrl}api/Products`, brand, { headers: header });
   }
 }

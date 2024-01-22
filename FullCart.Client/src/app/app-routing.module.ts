@@ -10,14 +10,30 @@ import { AdminAuthGuard } from './util_services/admin-auth.guard';
 import { AuthGuard } from './util_services/auth.guard';
 import { BrandComponent } from './admin-product/brand/brand.component';
 import { NewBrandComponent } from './admin-product/brand/new-brand/new-brand.component';
+import { ProductComponent } from './admin-product/product/product.component';
+import { CategoryComponent } from './admin-product/category/category.component';
+import { NewCategoryComponent } from './admin-product/category/new-category/new-category.component';
+import { NewProductComponent } from './admin-product/product/new-product/new-product.component';
 
 const routes : Routes = [
   {path: '', component: LoginComponent},
+
   {path: 'admin-product', component: AdminProductComponent, canActivate: [AdminAuthGuard]},
-  {path: 'brands', component: BrandComponent, canActivate: [AdminAuthGuard]},
+
+  {path: 'brands', component: BrandComponent, canActivate: [AuthGuard]},
   {path: 'brand-add', component: NewBrandComponent, canActivate: [AdminAuthGuard]},
   {path: 'brand-add/:id', component: NewBrandComponent, canActivate: [AdminAuthGuard]},
+
+  {path: 'categories', component: CategoryComponent, canActivate: [AuthGuard]},
+  {path: 'category-add', component: NewCategoryComponent, canActivate: [AdminAuthGuard]},
+  {path: 'category-add/:id', component: NewCategoryComponent, canActivate: [AdminAuthGuard]},
+
+  {path: 'products', component: ProductComponent, canActivate: [AuthGuard]},
+  {path: 'product-add', component: NewProductComponent, canActivate: [AdminAuthGuard]},
+  {path: 'product-add/:id', component: NewProductComponent, canActivate: [AdminAuthGuard]},
+
   {path: 'customer-product', component: CustomerProductComponent, canActivate: [AuthGuard]},
+  
   {path: 'unauthorized', component: UnAuthorizedComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ]
