@@ -28,6 +28,11 @@ namespace FullCart.DAL.Repository
             return await (filter == null ? _context.Set<TEntity>().ToListAsync() : _context.Set<TEntity>().Where(filter).ToListAsync());
         }
 
+        public async Task<TEntity> GetById(int Id)
+        {
+            return  _context.Set<TEntity>().Find(Id);
+        }
+
         public async Task<TEntity> UpdateAsync(TEntity updated)
         {
             if (updated == null)
@@ -65,6 +70,11 @@ namespace FullCart.DAL.Repository
             _context.Entry(deleted).State = EntityState.Deleted;
             _context.SaveChanges();
             return deleted;
+        }
+
+        public TEntity Delete(TEntity deleted)
+        {
+            throw new NotImplementedException();
         }
     }
 }

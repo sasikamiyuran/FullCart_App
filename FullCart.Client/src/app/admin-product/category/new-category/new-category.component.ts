@@ -6,21 +6,29 @@ import { ClientAppService } from 'src/app/client-app.service';
 @Component({
   selector: 'app-new-category',
   templateUrl: './new-category.component.html',
-  styleUrls: ['./new-category.component.css']
+  styleUrls: ['./new-category.component.css'],
 })
 export class NewCategoryComponent implements OnInit {
   category: CategoryModel;
+  categoryId!: string | null;
 
-  constructor(private _service: ClientAppService,
+  constructor(
+    private _service: ClientAppService,
     private _router: Router,
-    private _activateRoute: ActivatedRoute){
-    this.category ={name: '', categoryId: 0, imagePath: ''}
+    private _activateRoute: ActivatedRoute
+  ) {
+    this.category = { name: '', categoryId: 0, imagePath: '' };
+    this.categoryId = '0';
   }
-  
+
   ngOnInit(): void {
-    let Id = this._activateRoute.snapshot.paramMap.get('id');
-    if (Id != null || Id != undefined) {
-      this.getCategoryById(+Id);
+    this.categoryId = this._activateRoute.snapshot.paramMap.get('id');
+    if (
+      this.categoryId != '0' &&
+      this.categoryId != null &&
+      this.categoryId != undefined
+    ) {
+      this.getCategoryById(+this.categoryId);
     }
   }
 
@@ -37,21 +45,37 @@ export class NewCategoryComponent implements OnInit {
   }
 
   addNewCategory() {
-    this._service.addCategory(this.category).subscribe({
-      next: (data) => {
-        console.log(data);
-        this.backToList();
-      },
-      error: (err) => {
-        console.log(err);
-        alert('Error');
-      },
-      complete: () => {},
-    });
+    if (
+      this.categoryId != '0' &&
+      this.categoryId != null &&
+      this.categoryId != undefined
+    ) {
+      this._service.updateCategory(+this.categoryId, this.category).subscribe({
+        next: (data) => {
+          this.backToList();
+        },
+        error: (err) => {
+          console.log(err);
+          alert('Error');
+        },
+        complete: () => {},
+      });
+    } else {
+      this._service.addCategory(this.category).subscribe({
+        next: (data) => {
+          console.log(data);
+          this.backToList();
+        },
+        error: (err) => {
+          console.log(err);
+          alert('Error');
+        },
+        complete: () => {},
+      });
+    }
   }
 
   backToList() {
     this._router.navigate(['/categories']);
   }
-
 }

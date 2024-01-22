@@ -55,6 +55,16 @@ export class ClientAppService {
     return this._http.post(`${baseUrl}api/Brands`, brand, { headers: header });
   }
 
+  updateBrand(Id: number, brand: BrandModel): Observable<any> {
+    const header = this.getHeaders();
+    return this._http.put(`${baseUrl}api/Brands/${Id}`, brand, { headers: header });
+  }
+
+  deleteBrand(Id: number): Observable<any> {
+    const header = this.getHeaders();
+    return this._http.delete(`${baseUrl}api/Brands/${Id}`, { headers: header });
+  }
+
   //Category Services
   getCategories(): Observable<any> {
     const header = this.getHeaders();
@@ -71,6 +81,16 @@ export class ClientAppService {
     return this._http.post(`${baseUrl}api/Categories`, brand, { headers: header });
   }
 
+  updateCategory(Id: number, brand: CategoryModel): Observable<any> {
+    const header = this.getHeaders();
+    return this._http.put(`${baseUrl}api/Categories/${Id}`, brand, { headers: header });
+  }
+
+  deleteCategory(Id: number): Observable<any> {
+    const header = this.getHeaders();
+    return this._http.delete(`${baseUrl}api/Categories/${Id}`, { headers: header });
+  }
+
   //Product Services
   getProducts(): Observable<any> {
     const header = this.getHeaders();
@@ -85,5 +105,15 @@ export class ClientAppService {
   addProduct(brand: ProductModel): Observable<any> {
     const header = this.getHeaders();
     return this._http.post(`${baseUrl}api/Products`, brand, { headers: header });
+  }
+
+  updateProduct(Id: number, brand: ProductModel): Observable<any> {
+    const header = this.getHeaders();
+    return this._http.put(`${baseUrl}api/Products/${Id}`, brand, { headers: header });
+  }
+
+  deleteProduct(Id: number): Observable<any> {
+    const header = this.getHeaders();
+    return this._http.delete(`${baseUrl}api/Products/${Id}`, { headers: header });
   }
 }

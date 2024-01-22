@@ -20,6 +20,7 @@ export class CategoryComponent implements OnInit {
   }
 
   getAllCategories() {
+    this.categories = [];
     this._service.getCategories().subscribe({
       next: (data) => {
         console.log(data);
@@ -36,7 +37,21 @@ export class CategoryComponent implements OnInit {
     this._router.navigate(['category-add']);
   }
 
-  updateBrand(Id: number) {
+  updateCategory(Id: number) {
     this._router.navigate(['category-add/' + Id]);
+  }
+
+  deleteCategory(categoryId: number, categoryName: string) {
+    if (confirm('Are you sure delete ' + categoryName)) {
+      this._service.deleteCategory(categoryId).subscribe({
+        next: (data) => {
+          this.getAllCategories();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {},
+      });
+    }
   }
 }

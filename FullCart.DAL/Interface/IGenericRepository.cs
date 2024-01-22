@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -11,10 +12,13 @@ namespace FullCart.DAL.Interface
     {
         Task<T> Get(Expression<Func<T, bool>> filter = null);
         Task<List<T>> GetList(Expression<Func<T, bool>> filter = null);
+        Task<T> GetById(int id);
         Task<T> UpdateAsync(T updated);
 
         Task<T> AddAsync(T inserted);
 
         Task<T> DeleteAsync(T deleted);
+
+        T Delete(T deleted);
     }
 }

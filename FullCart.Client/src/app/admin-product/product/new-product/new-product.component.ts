@@ -12,7 +12,7 @@ import { ClientAppService } from 'src/app/client-app.service';
 })
 export class NewProductComponent implements OnInit {
   product: ProductModel;
-  productId!: number | null;
+  productId!: string | null;
 
   categories: CategoryModel[];
   brands: BrandModel[];
@@ -34,12 +34,13 @@ export class NewProductComponent implements OnInit {
     };
     this.categories = [];
     this.brands = [];
+    this.productId = '0';
   }
 
   ngOnInit(): void {
-    let Id = this._activateRoute.snapshot.paramMap.get('id');
-    if (Id != null || Id != undefined) {
-      this.getProductById(+Id);
+    this.productId = this._activateRoute.snapshot.paramMap.get('id');
+    if (this.productId != '0' && this.productId != null && this.productId != undefined) {
+      this.getProductById(+this.productId);
     }
 
     this.getBrands();
@@ -85,17 +86,30 @@ export class NewProductComponent implements OnInit {
   }
 
   addNewProduct() {
-    this._service.addProduct(this.product).subscribe({
-      next: (data) => {
-        console.log(data);
-        this.backToList();
-      },
-      error: (err) => {
-        console.log(err);
-        alert('Error');
-      },
-      complete: () => {},
-    });
+    if(this.productId != '0' && this.productId != null && this.productId != undefined){
+      this._service.updateProduct(+this.productId, this.product).subscribe({
+        next: (data) => {
+          this.backToList();
+        },
+        error: (err) => {
+          console.log(err);
+          alert('Error');
+        },
+        complete: () => {},
+      });
+    }
+    else{
+      this._service.addProduct(this.product).subscribe({
+        next: (data) => {
+          this.backToList();
+        },
+        error: (err) => {
+          console.log(err);
+          alert('Error');
+        },
+        complete: () => {},
+      });
+    }
   }
 
   backToList() {

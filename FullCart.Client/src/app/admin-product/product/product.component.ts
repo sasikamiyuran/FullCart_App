@@ -23,6 +23,7 @@ export class ProductComponent implements OnInit {
   }
 
   getAllProducts() {
+    this.products = [];
     this._service.getProducts().subscribe({
       next: (data) => {
         console.log(data);
@@ -41,6 +42,20 @@ export class ProductComponent implements OnInit {
 
   updateProduct(Id: number) {
     this._router.navigate(['product-add/' + Id]);
+  }
+
+  deleteProduct(productId: number, productName: string) {
+    if (confirm('Are you sure delete ' + productName)) {
+      this._service.deleteProduct(productId).subscribe({
+        next: (data) => {
+          this.getAllProducts();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {},
+      });
+    }
   }
 
   export()

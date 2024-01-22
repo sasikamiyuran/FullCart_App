@@ -25,9 +25,9 @@ namespace FullCart.API.Controllers
 
         // GET api/<BrandsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<BrandDto> Get(int id)
         {
-            return "value";
+            return await _service.GetBrandById(id);
         }
 
         // POST api/<BrandsController>
@@ -49,8 +49,9 @@ namespace FullCart.API.Controllers
         // DELETE api/<BrandsController>/5
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
-        public void Delete(int id)
+        public async void Delete(int id)
         {
+            await _service.DeleteAsync(id);
         }
     }
 }

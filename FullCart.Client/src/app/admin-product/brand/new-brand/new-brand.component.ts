@@ -10,7 +10,7 @@ import { ClientAppService } from 'src/app/client-app.service';
 })
 export class NewBrandComponent implements OnInit {
   brand: BrandModel;
-  brandId!: number | null;
+  brandId!: string | null;
 
   constructor(
     private _service: ClientAppService,
@@ -22,12 +22,17 @@ export class NewBrandComponent implements OnInit {
       name: '',
       imagePath: '',
     };
+    this.brandId = '0';
   }
 
   ngOnInit(): void {
-    let Id = this._activateRoute.snapshot.paramMap.get('id');
-    if (Id != null || Id != undefined) {
-      this.getBrandById(+Id);
+    this.brandId = this._activateRoute.snapshot.paramMap.get('id');
+    if (
+      this.brandId != '0' &&
+      this.brandId != null &&
+      this.brandId != undefined
+    ) {
+      this.getBrandById(+this.brandId);
     }
   }
 
@@ -44,17 +49,35 @@ export class NewBrandComponent implements OnInit {
   }
 
   addNewBrand() {
-    this._service.addBrand(this.brand).subscribe({
-      next: (data) => {
-        console.log(data);
-        this.backToList();
-      },
-      error: (err) => {
-        console.log(err);
-        alert('Error');
-      },
-      complete: () => {},
-    });
+    if (
+      this.brandId != null &&
+      this.brandId != '0' &&
+      this.brandId != undefined
+    ) {
+      this._service.updateBrand(+this.brandId, this.brand).subscribe({
+        next: (data) => {
+          console.log(data);
+          this.backToList();
+        },
+        error: (err) => {
+          console.log(err);
+          alert('Error');
+        },
+        complete: () => {},
+      });
+    } else {
+      this._service.addBrand(this.brand).subscribe({
+        next: (data) => {
+          console.log(data);
+          this.backToList();
+        },
+        error: (err) => {
+          console.log(err);
+          alert('Error');
+        },
+        complete: () => {},
+      });
+    }
   }
 
   backToList() {

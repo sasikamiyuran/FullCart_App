@@ -37,4 +37,19 @@ export class BrandComponent implements OnInit {
   updateBrand(Id: number) {
     this._router.navigate(['brand-add/' + Id]);
   }
+
+  deleteBrand(brandId: number, brandName: string) {
+    if (confirm('Are you sure delete ' + brandName)) {
+      this._service.deleteBrand(brandId).subscribe({
+        next: (data) => {
+          this.brands = [];
+          this.getBrands();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {},
+      });
+    }
+  }
 }

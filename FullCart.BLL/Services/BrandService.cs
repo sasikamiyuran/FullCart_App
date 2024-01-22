@@ -28,6 +28,13 @@ namespace FullCart.BLL.Services
             await _repository.AddAsync(brand);
         }
 
+        public async Task DeleteAsync(int brandId)
+        {
+            var brand = await _repository.GetById(brandId);
+
+            await _repository.DeleteAsync(brand);
+        }
+
         public async Task<List<BrandDto>> GetAllBrands()
         {
             var res = await _repository.GetList();
@@ -35,9 +42,17 @@ namespace FullCart.BLL.Services
             return _mapper.Map<List<BrandDto>>(res);
         }
 
+        public async Task<BrandDto> GetBrandById(int id)
+        {
+            var brand = await _repository.Get(brand => brand.BrandId == id);
+
+            return  _mapper.Map<BrandDto>(brand);
+        }
+
         public async Task UpdateBrandAsync(int Id, BrandDto brandDto)
         {
             var brand = _mapper.Map<Brand>(brandDto);
+
             await _repository.UpdateAsync(brand);
         }
     }

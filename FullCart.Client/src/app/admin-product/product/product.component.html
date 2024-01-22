@@ -29,7 +29,7 @@
       <td>{{ product.quantity }}</td>
       <td>
         <button class="btn btn-outline-info" (click)="updateProduct(product.categoryId)" >Edit</button>
-        <button class="btn btn-outline-danger">Delete</button>
+        <button class="btn btn-outline-danger" (click)="deleteProduct(product.productId, product.name)">Delete</button>
       </td>
     </tr>
   </tbody>

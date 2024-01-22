@@ -10,7 +10,9 @@ namespace FullCart.BLL.Interfaces
     public interface IBrandService
     {
         Task<List<BrandDto>> GetAllBrands();
+        Task<BrandDto> GetBrandById(int id);
         Task AddBrandAsync(BrandDto brand);
         Task UpdateBrandAsync(int Id, BrandDto brand);
+        Task DeleteAsync(int brandId);
     }
 }

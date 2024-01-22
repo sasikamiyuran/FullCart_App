@@ -10,7 +10,9 @@ namespace FullCart.BLL.Interfaces
     public interface IProductService
     {
         Task<List<ProductDto>> GetAllProducts();
+        Task<ProductDto> GetProductById(int id);
         Task AddProductAsync(ProductDto productDto);
         Task UpdateProductAsync(int Id, ProductDto productDto);
+        Task DeleteAsync(int productId);
     }
 }
