@@ -1,0 +1,19 @@
+<div class="row">
+    <h3>Product List</h3>
+</div>
+<div class="row">
+    <div class="col-3 h-5" *ngFor="let product of products">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">{{product.name}}</h4>
+                <p class="card-text" style="max-height: 175px; overflow:auto;">
+                    {{product.description}} 
+                </p>
+                <p class="card-text">
+                    {{product.price | currency}}
+                </p>
+                <button class="btn btn-primary" (click)="addToCart(product)">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>

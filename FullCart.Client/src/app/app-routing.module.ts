@@ -14,6 +14,7 @@ import { ProductComponent } from './admin-product/product/product.component';
 import { CategoryComponent } from './admin-product/category/category.component';
 import { NewCategoryComponent } from './admin-product/category/new-category/new-category.component';
 import { NewProductComponent } from './admin-product/product/new-product/new-product.component';
+import { ProductListComponent } from './product-list/product-list.component';
 
 const routes : Routes = [
   {path: '', component: LoginComponent},
@@ -33,7 +34,9 @@ const routes : Routes = [
   {path: 'product-add/:id', component: NewProductComponent, canActivate: [AdminAuthGuard]},
 
   {path: 'customer-product', component: CustomerProductComponent, canActivate: [AuthGuard]},
-  
+
+  {path: 'product-list', component: ProductListComponent, canActivate: [AuthGuard]},
+
   {path: 'unauthorized', component: UnAuthorizedComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ]

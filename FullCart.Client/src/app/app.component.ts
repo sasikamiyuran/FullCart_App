@@ -3,6 +3,7 @@ import { AuthService } from './util_services/auth.service';
 import { Router } from '@angular/router';
 import { UserRoleEnum } from './Enum/user-role.enum';
 import { ClientAppService } from './client-app.service';
+import { CartService } from './util_services/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +13,17 @@ import { ClientAppService } from './client-app.service';
 export class AppComponent implements OnInit {
   title = 'FullCart.Client';
   loggedInUserRole: string = '';
+  cartCount: number;
 
-  constructor(private _service: ClientAppService, private _authService: AuthService, private _router: Router){}
+  constructor(private _service: ClientAppService, private _authService: AuthService, private _cartService: CartService, private _router: Router){
+    this.cartCount = 0;
+  }
 
   ngOnInit(): void {
     this.checkUserRole();
+    this._cartService.cartUpdates$.subscribe(()=>{
+      this.cartCount = this._cartService.count;
+    });
   }
 
   checkUserRole(){

@@ -17,14 +17,17 @@
       </ul>
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngIf="loggedInUserRole == 'Customer'">
         <li class="nav-item active">
-          <a class="nav-link" href="#"
-            >Inventory </a
+          <a class="nav-link" [routerLink]="['/product-list']"
+            >Product </a
           >
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Cart</a>
         </li>
       </ul>
+    </div>
+    <div>
+      {{cartCount}}
     </div>
     <button *ngIf="loggedInUserRole == 'Admin' || loggedInUserRole == 'Customer'"
       class="btn btn-outline-success my-2 my-sm-0"

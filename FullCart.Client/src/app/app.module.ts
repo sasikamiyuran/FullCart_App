@@ -17,6 +17,8 @@ import { CategoryComponent } from './admin-product/category/category.component';
 import { ProductComponent } from './admin-product/product/product.component';
 import { NewCategoryComponent } from './admin-product/category/new-category/new-category.component';
 import { NewProductComponent } from './admin-product/product/new-product/new-product.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ShopingCartComponent } from './shoping-cart/shoping-cart.component';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -35,7 +37,9 @@ export function tokenGetter() {
     CategoryComponent,
     ProductComponent,
     NewCategoryComponent,
-    NewProductComponent
+    NewProductComponent,
+    ProductListComponent,
+    ShopingCartComponent
   ],
   imports: [
     BrowserModule,
