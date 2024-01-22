@@ -1,2 +1,43 @@
-<p>admin-product works!</p>
-<app-product></app-product>
+<div class="row">
+  <h4>Customer Order History</h4>
+</div>
+<table class="table table-striped table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Order Date</th>
+      <th scope="col">Total Amount</th>
+      <th scope="col">Current Status</th>
+      <th scope="col">View Details</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orderList">
+      <th scope="row">{{ order.orderId }}</th>
+      <td>{{ order.orderDate | date }}</td>
+      <td>{{ order.totalPrice | currency }}</td>
+      <td>{{ order.status }}</td>
+      <td>
+        <a [routerLink]="['/order-items']">View</a>
+      </td>
+      <td>
+        <i
+          class="fa fa-check mx-3"
+          aria-hidden="true"
+          style="font-size: large; color: green; cursor: pointer;"
+          (click)="approveOrder(order)"
+        >
+          Approve</i
+        >
+        <i
+          class="fa fa-ban"
+          aria-hidden="true"
+          style="font-size: large; color: red; cursor: pointer;" (click)="rejectOrder(order)"
+        >
+          Reject</i
+        >
+      </td>
+    </tr>
+  </tbody>
+</table>

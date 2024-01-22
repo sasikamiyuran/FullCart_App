@@ -16,6 +16,7 @@ import { NewCategoryComponent } from './admin-product/category/new-category/new-
 import { NewProductComponent } from './admin-product/product/new-product/new-product.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ShopingCartComponent } from './shoping-cart/shoping-cart.component';
+import { OrderItemsComponent } from './order-items/order-items.component';
 
 const routes : Routes = [
   {path: '', component: LoginComponent},
@@ -38,6 +39,8 @@ const routes : Routes = [
 
   {path: 'product-list', component: ProductListComponent, canActivate: [AuthGuard]},
   {path: 'shopping-cart', component: ShopingCartComponent, canActivate: [AuthGuard]},
+
+  {path: 'order-items', component: OrderItemsComponent, canActivate: [AuthGuard]},
 
   {path: 'unauthorized', component: UnAuthorizedComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'}

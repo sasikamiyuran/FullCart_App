@@ -19,6 +19,7 @@ import { NewCategoryComponent } from './admin-product/category/new-category/new-
 import { NewProductComponent } from './admin-product/product/new-product/new-product.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ShopingCartComponent } from './shoping-cart/shoping-cart.component';
+import { OrderItemsComponent } from './order-items/order-items.component';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -39,7 +40,8 @@ export function tokenGetter() {
     NewCategoryComponent,
     NewProductComponent,
     ProductListComponent,
-    ShopingCartComponent
+    ShopingCartComponent,
+    OrderItemsComponent
   ],
   imports: [
     BrowserModule,

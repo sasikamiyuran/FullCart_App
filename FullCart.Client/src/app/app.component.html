@@ -9,9 +9,11 @@
       <ul
         class="navbar-nav mr-auto mt-2 mt-lg-0"
         *ngIf="loggedInUserRole == 'Admin'"
-      >
+      ><li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/admin-product']">Dashboard </a>
+      </li>
         <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/products']">Inventory </a>
+          <a class="nav-link" [routerLink]="['/products']">Products </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/categories']">Category</a>
