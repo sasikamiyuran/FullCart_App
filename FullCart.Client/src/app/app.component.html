@@ -24,6 +24,9 @@
         class="navbar-nav mr-auto mt-2 mt-lg-0"
         *ngIf="loggedInUserRole == 'Customer'"
       >
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/customer-product']">Dashboard </a>
+      </li>
         <li class="nav-item active">
           <a class="nav-link" [routerLink]="['/product-list']">Product </a>
         </li>

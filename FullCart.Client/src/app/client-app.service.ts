@@ -7,6 +7,7 @@ import { AuthService } from './util_services/auth.service';
 import { BrandModel } from './Models/brand.model';
 import { ProductModel } from './Models/product.model';
 import { CategoryModel } from './Models/category.model';
+import { OrderModel } from './Models/order.model';
 
 const baseUrl = 'http://localhost:5222/';
 
@@ -115,5 +116,21 @@ export class ClientAppService {
   deleteProduct(Id: number): Observable<any> {
     const header = this.getHeaders();
     return this._http.delete(`${baseUrl}api/Products/${Id}`, { headers: header });
+  }
+
+   //Order Services
+   getOrders(): Observable<any> {
+    const header = this.getHeaders();
+    return this._http.get(`${baseUrl}api/Orders`, { headers: header });
+  }
+
+  getOrderById(Id: number): Observable<any> {
+    const header = this.getHeaders();
+    return this._http.get(`${baseUrl}api/Orders/` + Id, { headers: header });
+  }
+
+  addOrder(brand: OrderModel): Observable<any> {
+    const header = this.getHeaders();
+    return this._http.post(`${baseUrl}api/Orders`, brand, { headers: header });
   }
 }

@@ -43,13 +43,11 @@ export class CartService {
       1
     );
 
-    // if (item) {
-    //   item.qty++;
-    // } else {
-    //   let cartItem: CartProductModel = product as CartProductModel;
-    //   cartItem.qty = 1;
-    //   this.cartProductList.push(cartItem);
-    // }
+    this._cartUpdates.next('');
+  }
+
+  removeAllFromCart() {
+    this.cartProductList=[];
 
     this._cartUpdates.next('');
   }
