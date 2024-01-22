@@ -1,10 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ClientAppService } from '../client-app.service';
+import { AuthService } from '../util_services/auth.service';
 
 @Component({
   selector: 'app-customer-product',
   templateUrl: './customer-product.component.html',
   styleUrls: ['./customer-product.component.css']
 })
-export class CustomerProductComponent {
+export class CustomerProductComponent implements OnInit {
+
+  constructor(private _service: ClientAppService, private _authService: AuthService){}
+
+  ngOnInit(): void {
+    if(this._authService.isAuthenticated()){
+      let role = this._authService.getUserRoles();
+      this._service.setLoggedInUserRole(role);
+    }
+  }
 
 }

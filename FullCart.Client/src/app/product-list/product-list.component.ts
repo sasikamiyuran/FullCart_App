@@ -3,6 +3,7 @@ import { ProductModel } from '../Models/product.model';
 import { ClientAppService } from '../client-app.service';
 import { CartService } from '../util_services/cart.service';
 import { CartProductModel } from '../Models/cart-product.model';
+import { AuthService } from '../util_services/auth.service';
 
 @Component({
   selector: 'app-product-list',
@@ -12,11 +13,15 @@ import { CartProductModel } from '../Models/cart-product.model';
 export class ProductListComponent implements OnInit {
   products: ProductModel[];
 
-  constructor(private _service: ClientAppService, private _cartService: CartService){
+  constructor(private _service: ClientAppService, private _cartService: CartService, private _authService: AuthService){
     this.products=[];
   }
 
   ngOnInit(): void {
+    if(this._authService.isAuthenticated()){
+      let role = this._authService.getUserRoles();
+      this._service.setLoggedInUserRole(role);
+    }
     this.getAllProducts();
   }
 

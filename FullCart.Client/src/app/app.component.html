@@ -1,12 +1,17 @@
 <div class="container">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Binder</a>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02" *ngIf="loggedInUserRole == 'Admin' || loggedInUserRole == 'Customer'">
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngIf="loggedInUserRole == 'Admin'">
+    <div
+      class="collapse navbar-collapse"
+      id="navbarTogglerDemo02"
+      *ngIf="loggedInUserRole == 'Admin' || loggedInUserRole == 'Customer'"
+    >
+      <ul
+        class="navbar-nav mr-auto mt-2 mt-lg-0"
+        *ngIf="loggedInUserRole == 'Admin'"
+      >
         <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/products']"
-            >Inventory </a
-          >
+          <a class="nav-link" [routerLink]="['/products']">Inventory </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/categories']">Category</a>
@@ -15,21 +20,26 @@
           <a class="nav-link" [routerLink]="['/brands']">Brand</a>
         </li>
       </ul>
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngIf="loggedInUserRole == 'Customer'">
+      <ul
+        class="navbar-nav mr-auto mt-2 mt-lg-0"
+        *ngIf="loggedInUserRole == 'Customer'"
+      >
         <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/product-list']"
-            >Product </a
-          >
+          <a class="nav-link" [routerLink]="['/product-list']">Product </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Cart</a>
+          <a class="nav-link" [routerLink]="'/shopping-cart'">Shopping Cart <i
+            *ngIf="loggedInUserRole == 'Customer'"
+            class="fa fa-shopping-cart my-2 my-sm-0"
+            style="font-size: 20px; color: red; cursor: pointer" (click)="goToCart()"
+          >
+            {{ cartCount }}
+          </i></a>
         </li>
       </ul>
     </div>
-    <div>
-      {{cartCount}}
-    </div>
-    <button *ngIf="loggedInUserRole == 'Admin' || loggedInUserRole == 'Customer'"
+    <button
+      *ngIf="loggedInUserRole == 'Admin' || loggedInUserRole == 'Customer'"
       class="btn btn-outline-success my-2 my-sm-0"
       type="submit"
       (click)="signOut()"
@@ -40,3 +50,5 @@
 
   <router-outlet></router-outlet>
 </div>
+
+

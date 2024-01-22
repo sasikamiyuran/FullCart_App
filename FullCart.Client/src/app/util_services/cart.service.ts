@@ -34,4 +34,23 @@ export class CartService {
 
     this._cartUpdates.next('');
   }
+
+  removeFromCart(cartItem: CartProductModel) {
+    this.cartProductList.splice(
+      this.cartProductList.findIndex(
+        (c) => c.productId == cartItem.productId
+      ),
+      1
+    );
+
+    // if (item) {
+    //   item.qty++;
+    // } else {
+    //   let cartItem: CartProductModel = product as CartProductModel;
+    //   cartItem.qty = 1;
+    //   this.cartProductList.push(cartItem);
+    // }
+
+    this._cartUpdates.next('');
+  }
 }

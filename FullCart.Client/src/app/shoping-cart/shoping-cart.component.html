@@ -1,1 +1,22 @@
-<p>shoping-cart works!</p>
+<div class="row">
+  <h4>Shopping Cart Item</h4>
+  <b>Total : {{totalSum | currency}}</b>
+</div>
+<div class="row" *ngFor="let cartItem of cartProductList">
+  <div class="col-4">{{ cartItem.name }}</div>
+  <div class="col-3">{{ cartItem.price | currency }}</div>
+  <div class="col-3">
+    <input type="number" min="1" class="form-control" [(ngModel)]="cartItem.qty" readonly/>
+  </div>
+  <div class="col-2">
+    <button type="submit" class="btn btn-danger my-2" (click)="deleteItem(cartItem)">
+      Delete
+    </button>
+  </div>
+</div>
+<button type="submit" class="btn btn-primary mx-3" (click)="goBack()">
+  Go back
+</button>
+<button type="submit" class="btn btn-primary " (click)="checkoutCart()">
+  Checkout
+</button>
