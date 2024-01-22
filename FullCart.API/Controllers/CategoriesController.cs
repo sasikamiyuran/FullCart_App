@@ -1,5 +1,6 @@
 ﻿using FullCart.BLL.Interfaces;
 using FullCart.DTO.DTO;
+using Humanizer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,44 +10,45 @@ namespace FullCart.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BrandsController : ControllerBase
+    public class CategoriesController : ControllerBase
     {
-        private readonly IBrandService _service;
-        public BrandsController(IBrandService service)
+        private readonly ICategoryService _service;
+        public CategoriesController(ICategoryService service)
         {
             _service = service;
         }
-        // GET: api/<BrandsController>
+
+        // GET: api/<CategoriesController>
         [HttpGet]
-        public async Task<List<BrandDto>> Get()
+        public async Task<List<CategoryDto>> Get()
         {
-            return await _service.GetAllBrands();
+            return await _service.GetAllCategories();
         }
 
-        // GET api/<BrandsController>/5
+        // GET api/<CategoriesController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<BrandsController>
+        // POST api/<CategoriesController>
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async void Post([FromBody] BrandDto value)
+        public async void Post([FromBody] CategoryDto dto)
         {
-            await _service.AddBrandAsync(value);
+            await _service.AddCategoryAsync(dto);
         }
 
-        // PUT api/<BrandsController>/5
+        // PUT api/<CategoriesController>/5
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin")]
-        public async void Put(int id, [FromBody] BrandDto Dto)
+        public async void Put(int id, [FromBody] CategoryDto dto)
         {
-            await _service.UpdateBrandAsync(id, Dto);
+            await _service.UpdateCategoryAsync(id, dto);
         }
 
-        // DELETE api/<BrandsController>/5
+        // DELETE api/<CategoriesController>/5
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
         public void Delete(int id)
