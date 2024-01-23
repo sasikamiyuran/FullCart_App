@@ -57,7 +57,7 @@ namespace FullCart.BLL.Services
                 OrderItemProductDto dto = new OrderItemProductDto();
                 dto.ProductId = item.ProductId;
                 var product = await _productRepository.GetById(dto.ProductId);
-                dto.Name = product.Name;
+                dto.Name = product != null ? product.Name : "-- the product is not available --";
                 dto.OrderItemId = item.OrderItemId;
                 dto.Quantity = item.Quantity;
                 dto.Price = item.Price;

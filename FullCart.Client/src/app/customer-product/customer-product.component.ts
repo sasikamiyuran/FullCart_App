@@ -40,11 +40,11 @@ export class CustomerProductComponent implements OnInit {
     });
   }
 
-  cancelOrder(orderId: number){
-    this._service
-      .updateOrder(orderId, this.orderStatus.CANCELED)
-      .subscribe({
+  cancelOrder(orderId: number) {
+    if (confirm('Are you sure? you need to cancel the order : ' + orderId)) {
+      this._service.updateOrder(orderId, this.orderStatus.CANCELED).subscribe({
         next: () => {
+          alert('Success! your order has been cancelled!')
           this.getAllOrders();
         },
         error: (err) => {
@@ -52,5 +52,6 @@ export class CustomerProductComponent implements OnInit {
         },
         complete: () => {},
       });
+    }
   }
 }

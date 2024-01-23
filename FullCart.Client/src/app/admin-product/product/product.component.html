@@ -1,6 +1,6 @@
 <div class="col-8"><h4>Products</h4></div>
 <div class="col-4">
-  <button class="btn btn-outline-info" (click)="addNewProduct()">Add New</button>
+  <button class="btn btn-outline-info mx-2" (click)="addNewProduct()">Add New</button>
   <button class="btn btn-outline-warning" (click)="export()">Export Excel</button>
 </div>
 <table class="table" #TABLE>
@@ -14,7 +14,8 @@
       <th scope="col">Category</th>
       <th scope="col">Brand</th>
       <th scope="col">Quantity</th>
-      <th scope="col">Action</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -28,7 +29,9 @@
       <td>{{ product.brandId }}</td>
       <td>{{ product.quantity }}</td>
       <td>
-        <button class="btn btn-outline-info" (click)="updateProduct(product.categoryId)" >Edit</button>
+        <button class="btn btn-outline-info" (click)="updateProduct(product.productId)" >Edit</button>
+      </td>
+      <td>
         <button class="btn btn-outline-danger" (click)="deleteProduct(product.productId, product.name)">Delete</button>
       </td>
     </tr>

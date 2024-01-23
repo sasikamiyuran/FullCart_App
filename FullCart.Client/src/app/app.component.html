@@ -1,6 +1,6 @@
 <div class="container">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" >Binder</a>
+    <h3 class="navbar-brand" >Binder{{loggedInUserRole == 'Admin' ? ' - Admin' : loggedInUserRole == 'Customer' ? ' - Customer' : ''}}</h3>
     <div
       class="collapse navbar-collapse"
       id="navbarTogglerDemo02"

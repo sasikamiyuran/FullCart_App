@@ -1,6 +1,6 @@
 <div class="row">
-  <h4>Shopping Cart Item</h4>
-  <b>Total : {{totalSum | currency}}</b>
+  <h4>Shopping Cart - <i style="font-size: 15px;">Total Sum : {{totalSum | currency}}</i></h4>
+  
 </div>
 <div class="row" *ngFor="let cartItem of cartProductList">
   <div class="col-4">{{ cartItem.name }}</div>

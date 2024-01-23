@@ -42,30 +42,42 @@ export class AdminProductComponent implements OnInit {
   }
 
   approveOrder(order: OrderModel) {
-    this._service
-      .updateOrder(order.orderId, this.orderStatus.DELIVERED)
-      .subscribe({
-        next: () => {
-          this.getAllOrders();
-        },
-        error: (err) => {
-          console.log(err);
-        },
-        complete: () => {},
-      });
+    if (
+      confirm(
+        'Are you sure? Do you want to approve : ' + order.orderId.toString()
+      )
+    ) {
+      this._service
+        .updateOrder(order.orderId, this.orderStatus.DELIVERED)
+        .subscribe({
+          next: () => {
+            alert('Success! Your request has been delivered.');
+            this.getAllOrders();
+          },
+          error: (err) => {
+            console.log(err);
+          },
+          complete: () => {},
+        });
+    }
   }
 
   rejectOrder(order: OrderModel) {
-    this._service
-      .updateOrder(order.orderId, this.orderStatus.REJECTED)
-      .subscribe({
-        next: () => {
-          this.getAllOrders();
-        },
-        error: (err) => {
-          console.log(err);
-        },
-        complete: () => {},
-      });
+    if (
+      confirm('Are you sure? Do you want to reject : ' + order.orderId.toString())
+    ) {
+      this._service
+        .updateOrder(order.orderId, this.orderStatus.REJECTED)
+        .subscribe({
+          next: () => {
+            alert('Success! Your request has been rejected.');
+            this.getAllOrders();
+          },
+          error: (err) => {
+            console.log(err);
+          },
+          complete: () => {},
+        });
+    }
   }
 }

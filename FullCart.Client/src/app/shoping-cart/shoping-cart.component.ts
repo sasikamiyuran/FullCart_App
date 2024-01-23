@@ -59,12 +59,20 @@ export class ShopingCartComponent implements OnInit {
   }
 
   deleteItem(cartItem: CartProductModel) {
-    this._cartService.removeFromCart(cartItem);
+    if (
+      confirm('Are you sure? you need to delete the item : ' + cartItem.name)
+    ) {
+      this._cartService.removeFromCart(cartItem);
+    }
   }
 
   checkoutCart() {
     if (this.cartProductList.length == 0) {
       alert('No Item to checkout');
+      return;
+    }
+
+    if(!confirm('Are you sure? you need to checkout?')){
       return;
     }
 
@@ -95,7 +103,7 @@ export class ShopingCartComponent implements OnInit {
       next: (data) => {
         console.log(data);
         this._cartService.removeAllFromCart();
-        alert('Success');
+        alert('Success! your order has been checkout');
         this._router.navigate(['/customer-product']);
       },
       error: (err) => {

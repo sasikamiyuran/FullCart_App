@@ -58,6 +58,7 @@ export class ProductComponent implements OnInit {
     if (confirm('Are you sure delete ' + productName)) {
       this._service.deleteProduct(productId).subscribe({
         next: (data) => {
+          alert('Success! the product has been deleted')
           this.getAllProducts();
         },
         error: (err) => {
