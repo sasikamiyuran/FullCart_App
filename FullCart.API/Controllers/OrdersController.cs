@@ -29,6 +29,13 @@ namespace FullCart.API.Controllers
             return await _service.GetOrderById(id);
         }
 
+        // GET api/<OrdersController>/5
+        [HttpGet("itemProduct/{id}")]
+        public async Task<List<OrderItemProductDto>> GetItemProduct(int id)
+        {
+            return await _service.GetOrderProductItemsByProductIdAsync(id);
+        }
+
         // POST api/<OrdersController>
         [HttpPost]
         public async void Post([FromBody] OrderDto orderDto)
@@ -37,9 +44,10 @@ namespace FullCart.API.Controllers
         }
 
         // PUT api/<OrdersController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{id}/{status}")]
+        public async void Put(int id,  string status)
         {
+            await _service.UpdateOrderAsync(id, status);
         }
 
         // DELETE api/<OrdersController>/5

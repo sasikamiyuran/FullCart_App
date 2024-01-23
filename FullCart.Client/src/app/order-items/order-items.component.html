@@ -1,1 +1,26 @@
-<p>order-items works!</p>
+<div class="row">
+  <h5>Your Order Details</h5>
+</div>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Unit Price</th>
+      <th scope="col">Quatity</th>
+      <th scope="col">Unit Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of orderItemProducts">
+      <th scope="row">{{ product.productId }}</th>
+      <td>{{ product.name }}</td>
+      <td>{{ product.price | currency }}</td>
+      <td>{{ product.quantity }}</td>
+      <td>{{ product.price * product.quantity | currency }}</td>
+    </tr>
+  </tbody>
+</table>
+<button type="button" class="btn btn-primary" (click)="goBack()">
+  Go back
+</button>

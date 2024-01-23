@@ -1,25 +1,61 @@
-<div class="row" >
-    <h4>Order History</h4>
+<div class="row">
+  <h4>Order History</h4>
 </div>
 <table class="table table-striped table-dark">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Order Date</th>
-        <th scope="col">Total Amount</th>
-        <th scope="col">Current Status</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let order of orderList">
-        <th scope="row">{{order.orderId}}</th>
-        <td>{{order.orderDate | date}}</td>
-        <td>{{order.totalPrice | currency}}</td>
-        <td>{{order.status}}</td>
-        <td>
-            <a [routerLink]="['/order-items']">View Details</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Order Date</th>
+      <th scope="col">Total Amount</th>
+      <th scope="col">Current Status</th>
+      <th scope="col">View Details</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orderList">
+      <th scope="row">{{ order.orderId }}</th>
+      <td>{{ order.orderDate | date }}</td>
+      <td>{{ order.totalPrice | currency }}</td>
+      <td>{{ order.status }}</td>
+      <td>
+        <a [routerLink]="['/order-items', order.orderId]">View</a>
+      </td>
+      <td>
+        <i
+          *ngIf="order.status == orderStatus.PENDING"
+          class="fa fa-ban"
+          aria-hidden="true"
+          style="font-size: large; color: orange; cursor: pointer"
+          (click)="cancelOrder(order.orderId)"
+        >
+          Cancel</i
+        >
+        <i
+          *ngIf="order.status == orderStatus.DELIVERED"
+          class="fa fa-check-circle-o"
+          aria-hidden="true"
+          style="font-size: large; color: green"
+        >
+          Delevered</i
+        >
+        <i
+          *ngIf="order.status == orderStatus.REJECTED"
+          class="fa fa-times-circle-o"
+          aria-hidden="true"
+          style="font-size: large; color: red"
+        >
+          Rejected</i
+        >
+        <i
+          *ngIf="order.status == orderStatus.CANCELED"
+          class="fa fa-ban"
+          aria-hidden="true"
+          style="font-size: large; color: orangered"
+        >
+          Canceled</i
+        >
+      </td>
+    </tr>
+  </tbody>
+</table>

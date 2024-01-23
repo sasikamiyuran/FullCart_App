@@ -14,10 +14,12 @@ namespace FullCart.BLL.Services
     public class OrderService : IOrderService
     {
         private readonly IOrderRepository _repository;
+        private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
-        public OrderService(IOrderRepository repository, IMapper mapper)
+        public OrderService(IOrderRepository repository, IProductRepository productRepository, IMapper mapper)
         {
             _repository = repository;
+            _productRepository = productRepository;
             _mapper = mapper;
         }
 
@@ -46,9 +48,31 @@ namespace FullCart.BLL.Services
             return _mapper.Map<OrderDto>(category);
         }
 
-        public Task UpdateOrderAsync(int Id, OrderDto orderDto)
+        public async Task<List<OrderItemProductDto>> GetOrderProductItemsByProductIdAsync(int orderId)
         {
-            throw new NotImplementedException();
+            List<OrderItemProductDto> orderItemProductDtoList = new List<OrderItemProductDto>();
+            var order = await _repository.GetOrderByIdAsync(orderId);
+            foreach (var item in order.OrderItems)
+            {
+                OrderItemProductDto dto = new OrderItemProductDto();
+                dto.ProductId = item.ProductId;
+                var product = await _productRepository.GetById(dto.ProductId);
+                dto.Name = product.Name;
+                dto.OrderItemId = item.OrderItemId;
+                dto.Quantity = item.Quantity;
+                dto.Price = item.Price;
+
+                orderItemProductDtoList.Add(dto);
+            }
+
+            return orderItemProductDtoList;
+        }
+
+        public async Task UpdateOrderAsync(int Id, string orderStatus)
+        {
+            var order = await _repository.GetById(Id);
+            order.Status = orderStatus;
+            await _repository.UpdateAsync(order);
         }
     }
 }

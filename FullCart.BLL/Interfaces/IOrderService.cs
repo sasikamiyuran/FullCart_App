@@ -12,7 +12,8 @@ namespace FullCart.BLL.Interfaces
         Task<List<OrderDto>> GetAllOrders();
         Task<OrderDto> GetOrderById(int id);
         Task AddOrderAsync(OrderDto orderDto);
-        Task UpdateOrderAsync(int Id, OrderDto orderDto);
+        Task UpdateOrderAsync(int Id, string orderStatus);
         Task DeleteAsync(int orderId);
+        Task<List<OrderItemProductDto>> GetOrderProductItemsByProductIdAsync(int ProductId);
     }
 }

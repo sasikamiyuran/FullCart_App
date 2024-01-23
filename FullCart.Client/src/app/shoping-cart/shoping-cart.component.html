@@ -9,14 +9,14 @@
     <input type="number" min="1" class="form-control" [(ngModel)]="cartItem.qty" readonly/>
   </div>
   <div class="col-2">
-    <button type="submit" class="btn btn-danger my-2" (click)="deleteItem(cartItem)">
+    <button type="button" class="btn btn-danger my-2" (click)="deleteItem(cartItem)">
       Delete
     </button>
   </div>
 </div>
-<button type="submit" class="btn btn-primary mx-3" (click)="goBack()">
-  Go back
+<button type="button" class="btn btn-primary mx-3" (click)="goBack()">
+  Go shop
 </button>
-<button type="submit" class="btn btn-primary " (click)="checkoutCart()">
+<button type="button" class="btn btn-primary " (click)="checkoutCart()">
   Checkout
 </button>

@@ -19,24 +19,26 @@
       <td>{{ order.totalPrice | currency }}</td>
       <td>{{ order.status }}</td>
       <td>
-        <a [routerLink]="['/order-items']">View</a>
+        <a [routerLink]="['/order-items', order.orderId]">View</a>
       </td>
       <td>
-        <i
-          class="fa fa-check mx-3"
+        <i *ngIf="order.status != orderStatus.CANCELED"
+          class="fa fa-check-circle-o mx-3"
           aria-hidden="true"
-          style="font-size: large; color: green; cursor: pointer;"
+          style="font-size: large; color: green; cursor: pointer"
           (click)="approveOrder(order)"
         >
           Approve</i
         >
-        <i
-          class="fa fa-ban"
+        <i *ngIf="order.status != orderStatus.CANCELED"
+          class="fa fa-times-circle-o"
           aria-hidden="true"
-          style="font-size: large; color: red; cursor: pointer;" (click)="rejectOrder(order)"
+          style="font-size: large; color: red; cursor: pointer"
+          (click)="rejectOrder(order)"
         >
           Reject</i
         >
+        <span *ngIf="order.status == orderStatus.CANCELED">The order Cancelled by customer</span>
       </td>
     </tr>
   </tbody>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClientAppService } from '../client-app.service';
 import { AuthService } from '../util_services/auth.service';
 import { OrderModel } from '../Models/order.model';
+import { CartStatusEnum } from '../Enum/cart-status.enum';
 
 @Component({
   selector: 'app-customer-product',
@@ -10,6 +11,7 @@ import { OrderModel } from '../Models/order.model';
 })
 export class CustomerProductComponent implements OnInit {
   orderList: OrderModel[];
+  orderStatus = CartStatusEnum;
 
   constructor(
     private _service: ClientAppService,
@@ -36,5 +38,19 @@ export class CustomerProductComponent implements OnInit {
       },
       complete: () => {},
     });
+  }
+
+  cancelOrder(orderId: number){
+    this._service
+      .updateOrder(orderId, this.orderStatus.CANCELED)
+      .subscribe({
+        next: () => {
+          this.getAllOrders();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {},
+      });
   }
 }

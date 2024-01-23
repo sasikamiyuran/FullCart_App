@@ -40,7 +40,7 @@ const routes : Routes = [
   {path: 'product-list', component: ProductListComponent, canActivate: [AuthGuard]},
   {path: 'shopping-cart', component: ShopingCartComponent, canActivate: [AuthGuard]},
 
-  {path: 'order-items', component: OrderItemsComponent, canActivate: [AuthGuard]},
+  {path: 'order-items/:orderId', component: OrderItemsComponent, canActivate: [AuthGuard]},
 
   {path: 'unauthorized', component: UnAuthorizedComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'}

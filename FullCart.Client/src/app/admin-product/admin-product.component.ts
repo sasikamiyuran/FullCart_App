@@ -2,17 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { ClientAppService } from '../client-app.service';
 import { AuthService } from '../util_services/auth.service';
 import { OrderModel } from '../Models/order.model';
+import { CartStatusEnum } from '../Enum/cart-status.enum';
 
 @Component({
   selector: 'app-admin-product',
   templateUrl: './admin-product.component.html',
-  styleUrls: ['./admin-product.component.css']
+  styleUrls: ['./admin-product.component.css'],
 })
 export class AdminProductComponent implements OnInit {
   orderList: OrderModel[];
+  orderStatus = CartStatusEnum;
 
-  constructor(private _service: ClientAppService,
-    private _authService: AuthService){this.orderList = [];}
+  constructor(
+    private _service: ClientAppService,
+    private _authService: AuthService
+  ) {
+    this.orderList = [];
+  }
 
   ngOnInit(): void {
     if (this._authService.isAuthenticated()) {
@@ -23,6 +29,7 @@ export class AdminProductComponent implements OnInit {
   }
 
   getAllOrders() {
+    this.orderList = [];
     this._service.getOrders().subscribe({
       next: (data) => {
         this.orderList = data;
@@ -34,7 +41,31 @@ export class AdminProductComponent implements OnInit {
     });
   }
 
-  approveOrder(order: OrderModel){}
+  approveOrder(order: OrderModel) {
+    this._service
+      .updateOrder(order.orderId, this.orderStatus.DELIVERED)
+      .subscribe({
+        next: () => {
+          this.getAllOrders();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {},
+      });
+  }
 
-  rejectOrder(order: OrderModel){}
+  rejectOrder(order: OrderModel) {
+    this._service
+      .updateOrder(order.orderId, this.orderStatus.REJECTED)
+      .subscribe({
+        next: () => {
+          this.getAllOrders();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {},
+      });
+  }
 }

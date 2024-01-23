@@ -96,7 +96,7 @@ export class ShopingCartComponent implements OnInit {
         console.log(data);
         this._cartService.removeAllFromCart();
         alert('Success');
-        this.goBack();
+        this._router.navigate(['/customer-product']);
       },
       error: (err) => {
         console.log(err);

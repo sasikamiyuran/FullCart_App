@@ -133,4 +133,17 @@ export class ClientAppService {
     const header = this.getHeaders();
     return this._http.post(`${baseUrl}api/Orders`, brand, { headers: header });
   }
+
+  updateOrder(Id: number, status: string): Observable<any> {
+    console.log(status);
+    
+    const header = this.getHeaders();
+    return this._http.put(`${baseUrl}api/Orders/${Id}/${status}`, { headers: header });
+  }
+
+  getOrderItemProductByOrderId(Id: number): Observable<any> {
+    const header = this.getHeaders();
+    return this._http.get(`${baseUrl}api/Orders/itemProduct/` + Id, { headers: header });
+  }
+
 }
