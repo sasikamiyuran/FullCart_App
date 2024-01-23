@@ -8,17 +8,21 @@ import { AuthService } from '../util_services/auth.service';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
   products: ProductModel[];
 
-  constructor(private _service: ClientAppService, private _cartService: CartService, private _authService: AuthService){
-    this.products=[];
+  constructor(
+    private _service: ClientAppService,
+    private _cartService: CartService,
+    private _authService: AuthService
+  ) {
+    this.products = [];
   }
 
   ngOnInit(): void {
-    if(this._authService.isAuthenticated()){
+    if (this._authService.isAuthenticated()) {
       let role = this._authService.getUserRoles();
       this._service.setLoggedInUserRole(role);
     }
@@ -39,8 +43,7 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  addToCart(product: ProductModel){
+  addToCart(product: ProductModel) {
     this._cartService.addToCart(product);
   }
-
 }

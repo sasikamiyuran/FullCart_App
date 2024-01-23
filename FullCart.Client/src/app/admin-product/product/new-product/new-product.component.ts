@@ -4,6 +4,7 @@ import { BrandModel } from 'src/app/Models/brand.model';
 import { CategoryModel } from 'src/app/Models/category.model';
 import { ProductModel } from 'src/app/Models/product.model';
 import { ClientAppService } from 'src/app/client-app.service';
+import { AuthService } from 'src/app/util_services/auth.service';
 
 @Component({
   selector: 'app-new-product',
@@ -20,7 +21,8 @@ export class NewProductComponent implements OnInit {
   constructor(
     private _service: ClientAppService,
     private _router: Router,
-    private _activateRoute: ActivatedRoute
+    private _activateRoute: ActivatedRoute,
+    private _authService: AuthService
   ) {
     this.product = {
       productId: 0,
@@ -38,6 +40,11 @@ export class NewProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this._authService.isAuthenticated()){
+      let role = this._authService.getUserRoles();
+      this._service.setLoggedInUserRole(role);
+    }
+
     this.productId = this._activateRoute.snapshot.paramMap.get('id');
     if (this.productId != '0' && this.productId != null && this.productId != undefined) {
       this.getProductById(+this.productId);

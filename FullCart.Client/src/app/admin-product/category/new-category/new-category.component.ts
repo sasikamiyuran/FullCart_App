@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CategoryModel } from 'src/app/Models/category.model';
 import { ClientAppService } from 'src/app/client-app.service';
+import { AuthService } from 'src/app/util_services/auth.service';
 
 @Component({
   selector: 'app-new-category',
@@ -15,13 +16,19 @@ export class NewCategoryComponent implements OnInit {
   constructor(
     private _service: ClientAppService,
     private _router: Router,
-    private _activateRoute: ActivatedRoute
+    private _activateRoute: ActivatedRoute,
+    private _authService: AuthService
   ) {
     this.category = { name: '', categoryId: 0, imagePath: '' };
     this.categoryId = '0';
   }
 
   ngOnInit(): void {
+    if(this._authService.isAuthenticated()){
+      let role = this._authService.getUserRoles();
+      this._service.setLoggedInUserRole(role);
+    }
+
     this.categoryId = this._activateRoute.snapshot.paramMap.get('id');
     if (
       this.categoryId != '0' &&

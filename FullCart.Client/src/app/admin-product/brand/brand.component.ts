@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BrandModel } from 'src/app/Models/brand.model';
 import { ClientAppService } from 'src/app/client-app.service';
+import { AuthService } from 'src/app/util_services/auth.service';
 
 @Component({
   selector: 'app-brand',
@@ -11,9 +12,18 @@ import { ClientAppService } from 'src/app/client-app.service';
 export class BrandComponent implements OnInit {
   brands: BrandModel[] = [];
 
-  constructor(private _service: ClientAppService, private _router: Router) {}
+  constructor(
+    private _service: ClientAppService,
+    private _router: Router,
+    private _authService: AuthService
+  ) {}
 
   ngOnInit(): void {
+    if (this._authService.isAuthenticated()) {
+      let role = this._authService.getUserRoles();
+      this._service.setLoggedInUserRole(role);
+    }
+
     this.getBrands();
   }
 

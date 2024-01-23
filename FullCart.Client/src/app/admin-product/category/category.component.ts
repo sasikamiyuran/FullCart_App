@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryModel } from 'src/app/Models/category.model';
 import { ClientAppService } from 'src/app/client-app.service';
+import { AuthService } from 'src/app/util_services/auth.service';
 
 @Component({
   selector: 'app-category',
@@ -11,11 +12,20 @@ import { ClientAppService } from 'src/app/client-app.service';
 export class CategoryComponent implements OnInit {
   categories: CategoryModel[];
 
-  constructor(private _service: ClientAppService, private _router: Router) {
+  constructor(
+    private _service: ClientAppService,
+    private _router: Router,
+    private _authService: AuthService
+  ) {
     this.categories = [];
   }
 
   ngOnInit(): void {
+    if (this._authService.isAuthenticated()) {
+      let role = this._authService.getUserRoles();
+      this._service.setLoggedInUserRole(role);
+    }
+
     this.getAllCategories();
   }
 
